@@ -4,13 +4,16 @@ services:
   php:
     build: .
     ports:
-      - "9501-9599:9501-9599"
+      - "9501-9509:9501-9509"
     volumes:
-      - ./conf:/usr/local/etc/php
+      - ./php/conf:/usr/local/etc/php
       - ./apps:/var/www
     depends_on:
       - mysql
       - redis
+    environment:
+      PHP_IDE_CONFIG: "serverName=swoole"
+    command: tail -F anything
 
   mysql:
     image: mysql:8.0
@@ -27,3 +30,8 @@ services:
     ports:
       - "6379:6379"
     image: redis:alpine
+
+  elasticsearch:
+    image: elasticsearch:7.17.0
+    ports:
+      - "9200:9200"
