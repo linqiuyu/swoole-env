@@ -1,0 +1,3 @@
+[submodule "yasd"]
+	path = yasd
+	url = https://github.com/swoole/yasd.git
